@@ -1,0 +1,194 @@
+:root{
+  --bg:#fff8e7;
+  --text:#141414;
+  --muted:#4a4a4a;
+  --rule:#4a4a4a;
+}
+
+*{ box-sizing:border-box; }
+
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.container{
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+h1, h2, h3{
+  font-family: "Libre Baskerville", Georgia, serif;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+h1{
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  margin: 0 0 1rem 0;
+}
+
+.subhead{
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin: 0 0 2.25rem 0;
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+p{
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin: 0 0 1.35rem 0;
+  max-width: 70ch;
+}
+
+hr{
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 4rem 0;
+}
+
+.boundary{
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding-left: 1rem;
+  border-left: 3px solid var(--rule);
+}
+
+.offer{
+  margin-top: 3.25rem;
+}
+
+.offer h2{
+  margin: 0 0 1.25rem 0;
+}
+
+.offer h3{
+  margin: 2.25rem 0 0.75rem 0;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+ul{
+  margin: 0.75rem 0 0 1.25rem;
+  padding: 0;
+}
+
+li{
+  margin: 0.55rem 0;
+  line-height: 1.65;
+}
+
+a{
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover{
+  opacity: 0.8;
+}
+
+.cta{
+  margin-top: 3rem;
+  font-weight: 600;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pagehead{
+  margin-bottom: 3rem;
+}
+
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+
+.gallery figure{
+  margin: 0;
+  grid-column: span 12;
+}
+
+.gallery img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 600px){
+  .container{
+    padding: 3rem 1rem;
+  }
+}
+
+/* Center the page content horizontally and vertically.
+   If you only want horizontal centering, remove the flex rules. */
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Smooth color transitions for theme switching */
+body{
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Dark mode: match OS/browser preference */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #0b1220;
+    --text: #fff8e7;
+    --muted: #9aa6b2, 0.27;
+    --rule: rgba(255,255,255,0.33);
+  }
+
+  html, body{
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  a{
+    color: #9fd1ff;
+  }
+
+  .boundary{
+    border-left-color: var(--rule);
+  }
+
+  .gallery img{
+    border-radius: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
