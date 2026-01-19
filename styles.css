@@ -523,3 +523,27 @@ img{
   .viewer-foot{ padding-bottom: 26px; }
 }
 
+/* ---------- ZOOM ---------- */
+.viewer-frame{
+  position: relative;
+  cursor: zoom-in;
+}
+
+.viewer-frame.is-zoomed{
+  cursor: grab;
+}
+
+.viewer-frame.is-zoomed:active{
+  cursor: grabbing;
+}
+
+.viewer-frame img{
+  transform-origin: center center;
+  transition: transform .18s ease;
+  will-change: transform;
+}
+
+.viewer-frame.is-zoomed img{
+  transform: scale(2);
+}
+
