@@ -486,7 +486,7 @@ img{
 .viewer-frame img{
   width: 100%;
   height: auto;
-  display: block;
+ object-fit: contain; /* so zoom feels real */
 }
 
 .nav-btn{
