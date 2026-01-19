@@ -452,7 +452,8 @@ img{
   }
 }
 .mini-shot-link{
-  display: inline-block;
+  display: block;
+  width: fit-content;
 }
 
 .mini-shot-link:hover .mini-shot{
