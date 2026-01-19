@@ -118,16 +118,12 @@ frame.addEventListener("touchend", (e) => {
 </script>
 
   <script>
-  const frame = document.querySelector(".viewer-frame");
-  const img = document.getElementById("viewerImg");
+// --- ZOOM (same script, no redeclare) ---
+let zoomed = false;
+let startX = 0, startY = 0;
+let offsetX = 0, offsetY = 0;
 
-  let zoomed = false;
-  let startX = 0, startY = 0;
-  let offsetX = 0, offsetY = 0;
-
-// toggle zoom (use pointerup so it works on mobile + desktop)
-frame.addEventListener("pointerup", (e) => {
-  // ignore if this was a swipe gesture (see below)
+frame.addEventListener("pointerup", () => {
   if (frame.dataset.swiping === "1") return;
 
   zoomed = !zoomed;
@@ -136,44 +132,44 @@ frame.addEventListener("pointerup", (e) => {
   if (!zoomed){
     offsetX = 0;
     offsetY = 0;
-    img.style.transform = "scale(1)";
+    imgEl.style.transform = "scale(1)";
   } else {
-    img.style.transform = "scale(2)";
+    imgEl.style.transform = "scale(2)";
   }
 });
 
-  // drag to pan
-  frame.addEventListener("mousedown", (e) => {
-    if (!zoomed) return;
-    startX = e.clientX - offsetX;
-    startY = e.clientY - offsetY;
+frame.addEventListener("mousedown", (e) => {
+  if (!zoomed) return;
 
-    function move(ev){
-      offsetX = ev.clientX - startX;
-      offsetY = ev.clientY - startY;
-      img.style.transform = `scale(2) translate(${offsetX / 2}px, ${offsetY / 2}px)`;
-    }
+  startX = e.clientX - offsetX;
+  startY = e.clientY - offsetY;
 
-    function up(){
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
-    }
+  function move(ev){
+    offsetX = ev.clientX - startX;
+    offsetY = ev.clientY - startY;
+    imgEl.style.transform = `scale(2) translate(${offsetX / 2}px, ${offsetY / 2}px)`;
+  }
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
-  });
+  function up(){
+    window.removeEventListener("mousemove", move);
+    window.removeEventListener("mouseup", up);
+  }
 
-  // double-tap on mobile
-  let lastTap = 0;
-  frame.addEventListener("touchend", () => {
-    const now = Date.now();
-    if (now - lastTap < 300){
-      zoomed = !zoomed;
-      frame.classList.toggle("is-zoomed", zoomed);
-      img.style.transform = zoomed ? "scale(2)" : "scale(1)";
-    }
-    lastTap = now;
-  });
+  window.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", up);
+});
+
+// double-tap (optional)
+let lastTap = 0;
+frame.addEventListener("touchend", () => {
+  const now = Date.now();
+  if (now - lastTap < 300){
+    zoomed = !zoomed;
+    frame.classList.toggle("is-zoomed", zoomed);
+    imgEl.style.transform = zoomed ? "scale(2)" : "scale(1)";
+  }
+  lastTap = now;
+});
 </script>
 
 
