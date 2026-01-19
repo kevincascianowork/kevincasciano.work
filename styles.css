@@ -137,32 +137,46 @@ img{
   background: rgba(255,255,255,.15);
 }
 
-/* ---------- COLLECTIONS (replaces .work) ---------- */
+/* ---------- COLLECTIONS (horizontal row of 3) ---------- */
 .collections{
   background: var(--dark);
   color: var(--light);
 
   display: flex;
-  justify-content: center;     /* center the whole row */
-  align-items: stretch;
+  justify-content: center;     /* center the row */
+  align-items: flex-start;
+  flex-wrap: wrap;             /* prevents overflow */
 
-  gap: 80px;                   /* EVEN horizontal spacing */
+  gap: 80px;                   /* even spacing */
   padding: 120px 6vw;
 }
 
-/* each section stays centered + consistent width via .wrap inside */
+/* each collection becomes an equal-width card */
 .collection{
+  flex: 0 1 360px;             /* preferred width */
+  max-width: 360px;
   width: 100%;
 }
 
-/* ---------- WORK LAYOUT (inside each collection) ---------- */
-.work-grid{
-  display:grid;
-  grid-template-columns: 0.9fr 1.4fr;
-  gap: 40px;
+/* inside the horizontal row, .wrap should not be 1100px */
+.collections .wrap{
+  width: 100%;
+  margin: 0;
+}
+
+/* you currently only have .work-left (no right column) */
+.collections .work-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
   align-items: start;
 }
 
+.collections .work-left{
+  max-width: 44ch;
+}
+
+/* ---------- WORK TEXT STYLES (inside each collection) ---------- */
 .work-title{
   font-size: 18px;
   font-weight: 500;
@@ -209,7 +223,7 @@ img{
   opacity: .95;
 }
 
-/* If you later re-add right-side images, keep these */
+/* Optional: if you later re-add right-side images, keep these */
 .work-right{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -224,7 +238,6 @@ img{
   background: var(--dark-2);
 }
 
-/* default to landscape if used */
 .shot-a,
 .shot-b{
   aspect-ratio: 4 / 3;
@@ -245,15 +258,14 @@ img{
   .tiny-bottom{ margin-top: 22px; }
 
   .collections{
-    gap: 80px;
-    padding: 80px 0;
+    gap: 56px;
+    padding: 80px 6vw;
   }
 
-  .work-grid{
-    grid-template-columns: 1fr;
+  .collection{
+    flex-basis: 520px;
+    max-width: 520px;
   }
-  .work-right{
-    grid-template-columns: 1fr;
-  }
+
   .shot-b{ transform: none; }
 }
