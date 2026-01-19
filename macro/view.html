@@ -1,67 +1,117 @@
-<script>
-  // Put your actual filenames here (exactly as they exist in /img/)
-  const images = [
-    "widebee.jpg",
-    "pistil.jpg",
-    "butterfly.jpg",
-    "dahlia.jpg",
-    "flower.jpg",
-    "bc.jpg"
-  ];
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Macro — Viewer</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
 
-  const base = "/img/"; // <-- IMPORTANT: matches your current folder
+<body class="case">
 
-  const params = new URLSearchParams(location.search);
-  const requested = params.get("i") || images[0];
+  <header class="case-top">
+    <div class="wrap case-topbar">
+      <a class="case-back" href="/macro/">← Back to Macro</a>
 
-  let idx = images.indexOf(requested);
-  if (idx < 0) idx = 0;
+      <div class="case-id">
+        <div class="case-kicker">MACRO ENCOUNTERS</div>
+        <div id="counter" class="case-title">Image</div>
+      </div>
 
-  const imgEl = document.getElementById("viewerImg");
-  const counter = document.getElementById("counter");
-  const prevLink = document.getElementById("prevLink");
-  const nextLink = document.getElementById("nextLink");
+      <div class="case-meta">
+        <a class="case-back" href="/#work">Home</a>
+      </div>
+    </div>
+  </header>
 
-  function go(n){
-    idx = (n + images.length) % images.length;
+  <main class="viewer">
+    <button class="nav-btn prev" type="button" aria-label="Previous image">←</button>
 
-    const file = images[idx];
-    imgEl.src = base + file;
+    <figure class="viewer-frame">
+      <img id="viewerImg" alt="Macro image" />
+    </figure>
 
-    counter.textContent = `Image ${idx + 1} / ${images.length}`;
+    <button class="nav-btn next" type="button" aria-label="Next image">→</button>
+  </main>
 
-    const prevFile = images[(idx - 1 + images.length) % images.length];
-    const nextFile = images[(idx + 1) % images.length];
+  <footer class="viewer-foot">
+    <a class="pill pill-light" id="prevLink" href="#">Prev</a>
+    <a class="pill pill-light" id="nextLink" href="#">Next</a>
+  </footer>
 
-    prevLink.href = `/macro/view.html?i=${encodeURIComponent(prevFile)}`;
-    nextLink.href = `/macro/view.html?i=${encodeURIComponent(nextFile)}`;
+  <script>
+    const images = [
+      "widebee.jpg",
+      "pistil.jpg",
+      "butterfly.jpg",
+      "dahlia.jpg",
+      "flower.jpg",
+      "bc.jpg"
+    ];
 
-    history.replaceState(null, "", `/macro/view.html?i=${encodeURIComponent(file)}`);
-  }
+    const base = "/img/";
 
-  imgEl.loading = "eager";
-  go(idx);
+    const params = new URLSearchParams(location.search);
+    const requested = params.get("i") || images[0];
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") go(idx - 1);
-    if (e.key === "ArrowRight") go(idx + 1);
-    if (e.key === "Escape") location.href = "/macro/";
-  });
+    let idx = images.indexOf(requested);
+    if (idx < 0) idx = 0;
 
-  document.querySelector(".prev").addEventListener("click", () => go(idx - 1));
-  document.querySelector(".next").addEventListener("click", () => go(idx + 1));
+    const imgEl = document.getElementById("viewerImg");
+    const counter = document.getElementById("counter");
+    const prevLink = document.getElementById("prevLink");
+    const nextLink = document.getElementById("nextLink");
 
-  // swipe
-  let x0 = null;
-  document.querySelector(".viewer-frame").addEventListener("touchstart", (e) => {
-    x0 = e.touches[0].clientX;
-  }, {passive:true});
+    function go(n){
+      idx = (n + images.length) % images.length;
+      const file = images[idx];
 
-  document.querySelector(".viewer-frame").addEventListener("touchend", (e) => {
-    if (x0 == null) return;
-    const x1 = e.changedTouches[0].clientX;
-    const dx = x1 - x0;
-    if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
-    x0 = null;
-  }, {passive:true});
-</script>
+      imgEl.src = base + file;
+      counter.textContent = `Image ${idx + 1} / ${images.length}`;
+
+      const prevFile = images[(idx - 1 + images.length) % images.length];
+      const nextFile = images[(idx + 1) % images.length];
+
+      prevLink.href = `/macro/view.html?i=${encodeURIComponent(prevFile)}`;
+      nextLink.href = `/macro/view.html?i=${encodeURIComponent(nextFile)}`;
+
+      history.replaceState(null, "", `/macro/view.html?i=${encodeURIComponent(file)}`);
+    }
+
+    // load first image
+    imgEl.loading = "eager";
+    go(idx);
+
+    // buttons
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    prevBtn.addEventListener("click", () => go(idx - 1));
+    nextBtn.addEventListener("click", () => go(idx + 1));
+
+    // keyboard
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") go(idx - 1);
+      if (e.key === "ArrowRight") go(idx + 1);
+      if (e.key === "Escape") location.href = "/macro/";
+    });
+
+    // swipe
+    const frame = document.querySelector(".viewer-frame");
+    let x0 = null;
+
+    frame.addEventListener("touchstart", (e) => {
+      x0 = e.touches[0].clientX;
+    }, {passive:true});
+
+    frame.addEventListener("touchend", (e) => {
+      if (x0 == null) return;
+      const x1 = e.changedTouches[0].clientX;
+      const dx = x1 - x0;
+      if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
+      x0 = null;
+    }, {passive:true});
+  </script>
+
+</body>
+</html>
+
