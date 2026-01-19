@@ -11,7 +11,7 @@
 
   <header class="case-top">
     <div class="wrap case-topbar">
-      <a class="case-back" href="/macro/">← Back to Urban Ecology</a>
+      <a class="case-back" href="/urban-ecology/">← Back to Urban Ecology</a>
 
       <div class="case-id">
         <div class="case-kicker">URBAN ECOLOGY</div>
@@ -28,7 +28,7 @@
     <button class="nav-btn prev" type="button" aria-label="Previous image">←</button>
 
     <figure class="viewer-frame">
-      <img id="viewerImg" alt="Macro image" />
+      <img id="viewerImg" alt="Urban Ecology image" />
     </figure>
 
     <button class="nav-btn next" type="button" aria-label="Next image">→</button>
@@ -73,10 +73,10 @@
       const prevFile = images[(idx - 1 + images.length) % images.length];
       const nextFile = images[(idx + 1) % images.length];
 
-      prevLink.href = `/macro/view.html?i=${encodeURIComponent(prevFile)}`;
-      nextLink.href = `/macro/view.html?i=${encodeURIComponent(nextFile)}`;
+      prevLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(prevFile)}`;
+      nextLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(nextFile)}`;
 
-      history.replaceState(null, "", `/macro/view.html?i=${encodeURIComponent(file)}`);
+      history.replaceState(null, "", `/urban-ecology/view.html?i=${encodeURIComponent(file)}`);
     }
 
     // load first image
