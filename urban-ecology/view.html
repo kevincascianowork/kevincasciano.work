@@ -103,6 +103,62 @@
   }, {passive:true});
 </script>
 
+  <script>
+  const frame = document.querySelector(".viewer-frame");
+  const img = document.getElementById("viewerImg");
+
+  let zoomed = false;
+  let startX = 0, startY = 0;
+  let offsetX = 0, offsetY = 0;
+
+  // toggle zoom
+  frame.addEventListener("click", () => {
+    zoomed = !zoomed;
+    frame.classList.toggle("is-zoomed", zoomed);
+
+    if (!zoomed){
+      offsetX = 0;
+      offsetY = 0;
+      img.style.transform = "scale(1)";
+    } else {
+      img.style.transform = "scale(2)";
+    }
+  });
+
+  // drag to pan
+  frame.addEventListener("mousedown", (e) => {
+    if (!zoomed) return;
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
+
+    function move(ev){
+      offsetX = ev.clientX - startX;
+      offsetY = ev.clientY - startY;
+      img.style.transform = `scale(2) translate(${offsetX / 2}px, ${offsetY / 2}px)`;
+    }
+
+    function up(){
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+    }
+
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+  });
+
+  // double-tap on mobile
+  let lastTap = 0;
+  frame.addEventListener("touchend", () => {
+    const now = Date.now();
+    if (now - lastTap < 300){
+      zoomed = !zoomed;
+      frame.classList.toggle("is-zoomed", zoomed);
+      img.style.transform = zoomed ? "scale(2)" : "scale(1)";
+    }
+    lastTap = now;
+  });
+</script>
+
 
 </body>
 </html>
