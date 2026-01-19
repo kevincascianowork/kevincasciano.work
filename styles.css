@@ -210,8 +210,8 @@ img{
   background: var(--dark-2);
 }
 
-.shot-a{ aspect-ratio: 3/4; }
-.shot-b{ aspect-ratio: 3/4; transform: translateY(-18px); }
+.shot-a{ aspect-ratio: 4/3; }
+.shot-b{ aspect-ratio: 4/3; transform: translateY(-18px); }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 980px){
