@@ -198,9 +198,9 @@ img{
 
 .work-right{
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-  align-items: start;
+  grid-template-columns: repeat(3,1fr);
+  gap: 28px;
+  align-items: stretch;
 }
 
 .shot img {
