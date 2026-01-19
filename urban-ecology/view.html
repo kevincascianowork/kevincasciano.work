@@ -91,16 +91,30 @@
     if (e.key === "Escape") location.href = "/urban-ecology/";
   });
 
-  const frame = document.querySelector(".viewer-frame");
-  let x0 = null;
+ // swipe (with click-safe flag)
+const frame = document.querySelector(".viewer-frame");
+let x0 = null;
 
-  frame.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, {passive:true});
-  frame.addEventListener("touchend", (e) => {
-    if (x0 == null) return;
-    const dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
-    x0 = null;
-  }, {passive:true});
+frame.addEventListener("touchstart", (e) => {
+  x0 = e.touches[0].clientX;
+  frame.dataset.swiping = "0";
+}, {passive:true});
+
+frame.addEventListener("touchend", (e) => {
+  if (x0 == null) return;
+
+  const x1 = e.changedTouches[0].clientX;
+  const dx = x1 - x0;
+
+  if (Math.abs(dx) > 40){
+    frame.dataset.swiping = "1";
+    (dx > 0) ? go(idx - 1) : go(idx + 1);
+  }
+
+  x0 = null;
+  setTimeout(() => { frame.dataset.swiping = "0"; }, 50);
+}, {passive:true});
+
 </script>
 
   <script>
@@ -111,19 +125,22 @@
   let startX = 0, startY = 0;
   let offsetX = 0, offsetY = 0;
 
-  // toggle zoom
-  frame.addEventListener("click", () => {
-    zoomed = !zoomed;
-    frame.classList.toggle("is-zoomed", zoomed);
+// toggle zoom (use pointerup so it works on mobile + desktop)
+frame.addEventListener("pointerup", (e) => {
+  // ignore if this was a swipe gesture (see below)
+  if (frame.dataset.swiping === "1") return;
 
-    if (!zoomed){
-      offsetX = 0;
-      offsetY = 0;
-      img.style.transform = "scale(1)";
-    } else {
-      img.style.transform = "scale(2)";
-    }
-  });
+  zoomed = !zoomed;
+  frame.classList.toggle("is-zoomed", zoomed);
+
+  if (!zoomed){
+    offsetX = 0;
+    offsetY = 0;
+    img.style.transform = "scale(1)";
+  } else {
+    img.style.transform = "scale(2)";
+  }
+});
 
   // drag to pan
   frame.addEventListener("mousedown", (e) => {
