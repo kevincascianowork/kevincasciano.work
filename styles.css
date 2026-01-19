@@ -451,4 +451,16 @@ img{
     aspect-ratio: 16 / 10;
   }
 }
+.mini-shot-link{
+  display: inline-block;
+}
+
+.mini-shot-link:hover .mini-shot{
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.mini-shot{
+  transition: transform .15s ease, filter .15s ease;
+}
 
