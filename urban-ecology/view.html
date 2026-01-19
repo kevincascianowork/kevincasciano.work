@@ -39,79 +39,70 @@
     <a class="pill pill-light" id="nextLink" href="#">Next</a>
   </footer>
 
-  <script>
-    const images = [
-      "bird.jpg",
-      "chives.jpg",
-      "dill.JPEG",
-      "fern.jpg"
-      "milkweed.jpg",
-      "nasturtium.JPG",
-      "sorrel.jpg"
-    ];
+<script>
+  const images = [
+    "bird.jpg",
+    "chives.jpg",
+    "dill.JPEG",
+    "fern.jpg",
+    "milkweed.jpg",
+    "nasturtium.JPG",
+    "sorrel.jpg"
+  ];
 
-    const base = "/img/";
+  const base = "/img/";
 
-    const params = new URLSearchParams(location.search);
-    const requested = params.get("i") || images[0];
+  const params = new URLSearchParams(location.search);
+  const requested = params.get("i") || images[0];
 
-    let idx = images.indexOf(requested);
-    if (idx < 0) idx = 0;
+  let idx = images.indexOf(requested);
+  if (idx < 0) idx = 0;
 
-    const imgEl = document.getElementById("viewerImg");
-    const counter = document.getElementById("counter");
-    const prevLink = document.getElementById("prevLink");
-    const nextLink = document.getElementById("nextLink");
+  const imgEl = document.getElementById("viewerImg");
+  const counter = document.getElementById("counter");
+  const prevLink = document.getElementById("prevLink");
+  const nextLink = document.getElementById("nextLink");
 
-    function go(n){
-      idx = (n + images.length) % images.length;
-      const file = images[idx];
+  function go(n){
+    idx = (n + images.length) % images.length;
+    const file = images[idx];
 
-      imgEl.src = base + file;
-      counter.textContent = `Image ${idx + 1} / ${images.length}`;
+    imgEl.src = base + file;
+    counter.textContent = `Image ${idx + 1} / ${images.length}`;
 
-      const prevFile = images[(idx - 1 + images.length) % images.length];
-      const nextFile = images[(idx + 1) % images.length];
+    const prevFile = images[(idx - 1 + images.length) % images.length];
+    const nextFile = images[(idx + 1) % images.length];
 
-      prevLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(prevFile)}`;
-      nextLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(nextFile)}`;
+    prevLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(prevFile)}`;
+    nextLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(nextFile)}`;
 
-      history.replaceState(null, "", `/urban-ecology/view.html?i=${encodeURIComponent(file)}`);
-    }
+    history.replaceState(null, "", `/urban-ecology/view.html?i=${encodeURIComponent(file)}`);
+  }
 
-    // load first image
-    imgEl.loading = "eager";
-    go(idx);
+  imgEl.loading = "eager";
+  go(idx);
 
-    // buttons
-    const prevBtn = document.querySelector(".prev");
-    const nextBtn = document.querySelector(".next");
-    prevBtn.addEventListener("click", () => go(idx - 1));
-    nextBtn.addEventListener("click", () => go(idx + 1));
+  document.querySelector(".prev").addEventListener("click", () => go(idx - 1));
+  document.querySelector(".next").addEventListener("click", () => go(idx + 1));
 
-    // keyboard
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") go(idx - 1);
-      if (e.key === "ArrowRight") go(idx + 1);
-      if (e.key === "Escape") location.href = "/macro/";
-    });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") go(idx - 1);
+    if (e.key === "ArrowRight") go(idx + 1);
+    if (e.key === "Escape") location.href = "/urban-ecology/";
+  });
 
-    // swipe
-    const frame = document.querySelector(".viewer-frame");
-    let x0 = null;
+  const frame = document.querySelector(".viewer-frame");
+  let x0 = null;
 
-    frame.addEventListener("touchstart", (e) => {
-      x0 = e.touches[0].clientX;
-    }, {passive:true});
+  frame.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, {passive:true});
+  frame.addEventListener("touchend", (e) => {
+    if (x0 == null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
+    x0 = null;
+  }, {passive:true});
+</script>
 
-    frame.addEventListener("touchend", (e) => {
-      if (x0 == null) return;
-      const x1 = e.changedTouches[0].clientX;
-      const dx = x1 - x0;
-      if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
-      x0 = null;
-    }, {passive:true});
-  </script>
 
 </body>
 </html>
