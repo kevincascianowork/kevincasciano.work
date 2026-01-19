@@ -1,100 +1,67 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Macro — Viewer</title>
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body class="case">
+<script>
+  // Put your actual filenames here (exactly as they exist in /img/)
+  const images = [
+    "widebee.jpg",
+    "pistil.jpg",
+    "butterfly.jpg",
+    "dahlia.jpg",
+    "flower.jpg",
+    "bc.jpg"
+  ];
 
-  <header class="case-top">
-    <div class="wrap case-topbar">
-      <a class="case-back" href="/macro/">← Back to Macro</a>
+  const base = "/img/"; // <-- IMPORTANT: matches your current folder
 
-      <div class="case-id">
-        <div class="case-kicker">MACRO ENCOUNTERS</div>
-        <div id="counter" class="case-title">Image</div>
-      </div>
+  const params = new URLSearchParams(location.search);
+  const requested = params.get("i") || images[0];
 
-      <div class="case-meta">
-        <a class="case-back" href="/#work">Home</a>
-      </div>
-    </div>
-  </header>
+  let idx = images.indexOf(requested);
+  if (idx < 0) idx = 0;
 
-  <main class="viewer">
-    <button class="nav-btn prev" aria-label="Previous image">←</button>
+  const imgEl = document.getElementById("viewerImg");
+  const counter = document.getElementById("counter");
+  const prevLink = document.getElementById("prevLink");
+  const nextLink = document.getElementById("nextLink");
 
-    <figure class="viewer-frame">
-      <img id="viewerImg" alt="Macro image" />
-    </figure>
+  function go(n){
+    idx = (n + images.length) % images.length;
 
-    <button class="nav-btn next" aria-label="Next image">→</button>
-  </main>
+    const file = images[idx];
+    imgEl.src = base + file;
 
-  <footer class="viewer-foot">
-    <a class="pill pill-light" id="prevLink" href="#">Prev</a>
-    <a class="pill pill-light" id="nextLink" href="#">Next</a>
-  </footer>
+    counter.textContent = `Image ${idx + 1} / ${images.length}`;
 
-  <script>
-    // ---- CONFIG: list your images once (add/remove as needed) ----
-    const images = [
-      "im/widebee.jpg","img/pistil.jpg","img/butterfly.jpg","img/dahlia.jpg","img/flower.jpg","img/bc.jpg"
-    ];
-    const base = "/img/macro/full/";
+    const prevFile = images[(idx - 1 + images.length) % images.length];
+    const nextFile = images[(idx + 1) % images.length];
 
-    // ---- read ?i=001 (or default to first) ----
-    const params = new URLSearchParams(location.search);
-    const code = (params.get("i") || "001").padStart(3,"0");
-    let idx = images.findIndex(f => f.startsWith(code));
-    if (idx < 0) idx = 0;
+    prevLink.href = `/macro/view.html?i=${encodeURIComponent(prevFile)}`;
+    nextLink.href = `/macro/view.html?i=${encodeURIComponent(nextFile)}`;
 
-    const imgEl = document.getElementById("viewerImg");
-    const counter = document.getElementById("counter");
-    const prevLink = document.getElementById("prevLink");
-    const nextLink = document.getElementById("nextLink");
+    history.replaceState(null, "", `/macro/view.html?i=${encodeURIComponent(file)}`);
+  }
 
-    function go(n){
-      idx = (n + images.length) % images.length;
-      const file = images[idx];
-      imgEl.src = base + file;
-      counter.textContent = `Image ${idx + 1} / ${images.length}`;
-      const prevCode = images[(idx - 1 + images.length) % images.length].slice(0,3);
-      const nextCode = images[(idx + 1) % images.length].slice(0,3);
-      prevLink.href = `/macro/view.html?i=${prevCode}`;
-      nextLink.href = `/macro/view.html?i=${nextCode}`;
-      history.replaceState(null, "", `/macro/view.html?i=${file.slice(0,3)}`);
-    }
+  imgEl.loading = "eager";
+  go(idx);
 
-    // initial load (ensure full-res feels instant-ish)
-    imgEl.loading = "eager";
-    go(idx);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") go(idx - 1);
+    if (e.key === "ArrowRight") go(idx + 1);
+    if (e.key === "Escape") location.href = "/macro/";
+  });
 
-    // keyboard navigation
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") go(idx - 1);
-      if (e.key === "ArrowRight") go(idx + 1);
-      if (e.key === "Escape") location.href = "/macro/";
-    });
+  document.querySelector(".prev").addEventListener("click", () => go(idx - 1));
+  document.querySelector(".next").addEventListener("click", () => go(idx + 1));
 
-    // button navigation
-    document.querySelector(".prev").addEventListener("click", () => go(idx - 1));
-    document.querySelector(".next").addEventListener("click", () => go(idx + 1));
+  // swipe
+  let x0 = null;
+  document.querySelector(".viewer-frame").addEventListener("touchstart", (e) => {
+    x0 = e.touches[0].clientX;
+  }, {passive:true});
 
-    // swipe navigation (mobile)
-    let x0 = null;
-    document.querySelector(".viewer-frame").addEventListener("touchstart", (e) => {
-      x0 = e.touches[0].clientX;
-    }, {passive:true});
-    document.querySelector(".viewer-frame").addEventListener("touchend", (e) => {
-      if (x0 == null) return;
-      const x1 = e.changedTouches[0].clientX;
-      const dx = x1 - x0;
-      if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
-      x0 = null;
-    }, {passive:true});
-  </script>
-</body>
-</html>
+  document.querySelector(".viewer-frame").addEventListener("touchend", (e) => {
+    if (x0 == null) return;
+    const x1 = e.changedTouches[0].clientX;
+    const dx = x1 - x0;
+    if (Math.abs(dx) > 40) (dx > 0) ? go(idx - 1) : go(idx + 1);
+    x0 = null;
+  }, {passive:true});
+</script>
