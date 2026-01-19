@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Macro Encounters — Kevin Casciano</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="case">
+
+  <!-- Top bar -->
+  <header class="case-top">
+    <div class="wrap case-topbar">
+      <a class="case-back" href="/#work">← Back</a>
+      <div class="case-id">
+        <div class="case-kicker">CASE STUDY</div>
+        <h1 class="case-title">Macro Encounters</h1>
+      </div>
+      <div class="case-meta">
+        <div class="case-date">MARCH 2026</div>
+        <div class="case-loc">Long Island, NY</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="case-intro">
+    <div class="wrap case-introgrid">
+      <div class="case-introtext">
+        <p class="case-lead">
+          Intimate portraits revealing structure, vulnerability, and form at the smallest scales.
+        </p>
+        <p class="case-sub">
+          This series is built around stillness, controlled light, and obsessive detail. Each image is treated as a specimen and a character.
+        </p>
+      </div>
+
+      <!-- optional hero image -->
+      <figure class="case-hero">
+        <img src="/img/macro/001.jpg" alt="Macro hero image" loading="eager" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <main class="case-gallery">
+    <div class="wrap">
+
+      <div class="gallery-head">
+        <h2 class="gallery-title">Gallery</h2>
+        <p class="gallery-note">Click any image to view full size.</p>
+      </div>
+
+      <section class="grid">
+        <!-- Use sequential filenames for sanity -->
+        <a class="tile" href="/img/macro/001.jpg">
+          <img src="/img/bee.jpg" alt="Macro photograph 1" loading="lazy" />
+        </a>
+        <a class="tile" href="/img/macro/002.jpg">
+          <img src="/img/calendula.JPEG" alt="Macro photograph 2" loading="lazy" />
+        </a>
+        <a class="tile" href="/img/macro/003.jpg">
+          <img src="/img/macro/003.jpg" alt="Macro photograph 3" loading="lazy" />
+        </a>
+        <a class="tile" href="/img/macro/004.jpg">
+          <img src="/img/macro/004.jpg" alt="Macro photograph 4" loading="lazy" />
+        </a>
+        <a class="tile" href="/img/macro/005.jpg">
+          <img src="/img/macro/005.jpg" alt="Macro photograph 5" loading="lazy" />
+        </a>
+        <a class="tile" href="/img/macro/006.jpg">
+          <img src="/img/macro/006.jpg" alt="Macro photograph 6" loading="lazy" />
+        </a>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="case-footer">
+    <div class="wrap case-foot">
+      <a class="case-back" href="/#work">← Back to collections</a>
+      <span class="case-credit">© <span id="y"></span> Kevin Casciano</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
