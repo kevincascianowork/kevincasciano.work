@@ -142,13 +142,12 @@ img{
   background: var(--dark);
   color: var(--light);
 
-  /* even spacing between your 3 sections */
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
+  display: flex;
+  justify-content: center;     /* center the whole row */
+  align-items: stretch;
 
-  gap: 120px;
-  padding: 120px 0;
+  gap: 80px;                   /* EVEN horizontal spacing */
+  padding: 120px 6vw;
 }
 
 /* each section stays centered + consistent width via .wrap inside */
