@@ -530,3 +530,15 @@ img{
     margin: 0 auto;          /* centers inner content */
   }
 }
+@media (max-width: 980px){
+  .mini-shot-link{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pill{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
