@@ -1,30 +1,27 @@
 <!doctype html>
 <html lang="en">
-  
-<!--
-If you're reading this, you are a nerd :p
-  -->
-  
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-  
-  <!-- GLOBAL HEADER -->
-<header class="site-header">
-  <div class="wrap site-nav">
-    <a href="/" class="site-logo">KC</a>
 
-    <nav class="site-links">
-      <a href="/#work">Collections</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-    </nav>
-  </div>
-</header>
 <body>
+
+  <!-- GLOBAL HEADER -->
+  <header class="site-header">
+    <div class="wrap site-nav">
+      <a href="/" class="site-logo">KC</a>
+
+      <nav class="site-links">
+        <a href="/#work">Collections</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- HERO -->
   <header class="hero">
@@ -64,80 +61,77 @@ If you're reading this, you are a nerd :p
 
   <!-- COLLECTIONS -->
   <main id="work" class="collections">
+    <div class="wrap collections-grid">
 
-    <!-- COLLECTION 1 -->
-    <section class="collection">
-      <div class="wrap work-grid">
+      <!-- COLLECTION 1 -->
+      <section class="collection">
+        <div class="work-grid">
+          <div class="work-left">
+            <div class="meta">JANUARY 2026</div>
+            <h3 class="work-subtitle">Macro Encounters</h3>
 
-        <section class="work-left">
-          <h2 class="work-title"></h2>
-          <div class="meta">JANUARY 2026</div>
-          <h3 class="work-subtitle">Macro Encounters</h3>
+            <p class="work-text">
+              Intimate portraits revealing structure, vulnerability, and form at the smallest scales.
+            </p>
 
-          <p class="work-text">
-           Intimate portraits revealing structure, vulnerability, and form at the smallest scales.
-          </p>
+            <a class="pill pill-light" href="/macro/">Explore case study <span class="arrow">↘</span></a>
 
-        <a class="pill pill-light" href="/macro/">Explore case study <span class="arrow">↘</span></a>
-        <a href="/macro/" class="mini-shot-link">   
-          <div class="mini-shot">
-            <img src="img/calendula.JPEG" alt="Calendula" />
+            <a href="/macro/" class="mini-shot-link">
+              <div class="mini-shot">
+                <img src="img/calendula.JPEG" alt="Calendula" />
+              </div>
+            </a>
           </div>
-        </a>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </section>
+      <!-- COLLECTION 2 -->
+      <section class="collection">
+        <div class="work-grid">
+          <div class="work-left">
+            <div class="meta">NOVEMBER 2025</div>
+            <h3 class="work-subtitle">Urban Ecology</h3>
 
-    <!-- COLLECTION 2 -->
+            <p class="work-text">
+              A study of resilience and coexistence where human infrastructure meets living systems.
+            </p>
 
-    <section class="collection">
-      <div class="wrap work-grid">
+            <a class="pill pill-light" href="/urban-ecology/">View case study <span class="arrow">↘</span></a>
 
-        <section class="work-left">
-          <h2 class="work-title"></h2>
-          <div class="meta">NOVEMBER 2025</div>
-          <h3 class="work-subtitle">Urban Ecology</h3>
-
-          <p class="work-text">
-            A study of resilience and coexistence where human infrastructure meets living systems.
-          </p>
-
-          <a class="pill pill-light" href="/urban-ecology/">View case study <span class="arrow">↘</span></a>
-          <a href="/urban-ecology/" class="mini-shot-link">
-           <div class="mini-shot">
-            <img src="img/milkweed.jpg" alt="Urban Ecology" />
+            <a href="/urban-ecology/" class="mini-shot-link">
+              <div class="mini-shot">
+                <img src="img/milkweed.jpg" alt="Urban Ecology" />
+              </div>
+            </a>
           </div>
-          </a>
-        </section>
+        </div>
+      </section>
 
-            <!-- COLLECTION 3 -->
+      <!-- COLLECTION 3 -->
+      <section class="collection">
+        <div class="work-grid">
+          <div class="work-left">
+            <div class="meta">JULY 2024</div>
+            <h3 class="work-subtitle">Basalt &amp; Rain</h3>
 
-    <section class="collection">
-      <div class="wrap work-grid">
+            <p class="work-text">
+              Photographed on Hawaiʻi Island, where basalt hardens, rain returns, and life takes hold.
+            </p>
 
-        <section class="work-left">
-          <h2 class="work-title"></h2>
-          <div class="meta">JULY 2024</div>
-          <h3 class="work-subtitle">Basalt & Rain</h3>
+            <a class="pill pill-light" href="/basalt-rain/">View case study <span class="arrow">↘</span></a>
 
-          <p class="work-text">
-            Photographed on Hawaiʻi Island, where basalt hardens, rain returns, and life takes hold.
-          </p>
-
-          <a class="pill pill-light" href="/basalt&rain/">View case study <span class="arrow">↘</span></a>
-          <a href="/basalt&rain/" class="mini-shot-link">
-           <div class="mini-shot">
-            <img src="img/hi3.jpg" alt="Basalt & Rain" />
+            <a href="/basalt-rain/" class="mini-shot-link">
+              <div class="mini-shot">
+                <img src="img/hi3.jpg" alt="Basalt &amp; Rain" />
+              </div>
+            </a>
           </div>
-          </a>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </section>
-
+    </div>
   </main>
-  
+
   <!-- Footer -->
   <footer class="case-footer">
     <div class="wrap case-foot">
@@ -146,9 +140,9 @@ If you're reading this, you are a nerd :p
     </div>
   </footer>
 
-    <script>
+  <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-  
+
 </body>
 </html>
