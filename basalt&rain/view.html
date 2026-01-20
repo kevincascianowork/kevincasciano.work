@@ -73,10 +73,10 @@
     const prevFile = images[(idx - 1 + images.length) % images.length];
     const nextFile = images[(idx + 1) % images.length];
 
-    prevLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(prevFile)}`;
-    nextLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(nextFile)}`;
+    prevLink.href = `/basalt&rain/view.html?i=${encodeURIComponent(prevFile)}`;
+    nextLink.href = `/basalt&rain/view.html?i=${encodeURIComponent(nextFile)}`;
 
-    history.replaceState(null, "", `/urban-ecology/view.html?i=${encodeURIComponent(file)}`);
+    history.replaceState(null, "", `/basalt&rain/view.html?i=${encodeURIComponent(file)}`);
   }
 
   imgEl.loading = "eager";
