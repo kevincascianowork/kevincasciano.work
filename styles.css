@@ -469,6 +469,13 @@ img{
   padding: 0 0 36px;
 }
 
+/* viewer should own touch gestures */
+.viewer-frame{
+  touch-action: pan-x;          /* allow horizontal swipes, block double-tap/pinch zoom */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* zoom state */
 .viewer-frame.is-zoomed{ cursor: grab; }
 .viewer-frame.is-zoomed:active{ cursor: grabbing; }
