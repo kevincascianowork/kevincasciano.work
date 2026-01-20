@@ -514,3 +514,19 @@ img{
   .nav-btn{ display:none; }
   .viewer-foot{ padding-bottom: 26px; }
 }
+
+@media (max-width: 980px){
+  .collections{
+    grid-template-columns: 1fr;
+    justify-items: center;   /* ⬅️ centers each collection */
+  }
+
+  .collection{
+    max-width: 520px;        /* keeps a readable column width */
+    width: 100%;
+  }
+
+  .collections .work-left{
+    margin: 0 auto;          /* centers inner content */
+  }
+}
