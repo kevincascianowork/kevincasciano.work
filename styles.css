@@ -547,3 +547,52 @@ img{
   transform: scale(2);
 }
 
+/* ---------- GLOBAL HEADER ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(212,203,194,.75); /* warm hero bg */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(18,18,18,.08);
+}
+
+.site-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.site-logo{
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-decoration: none;
+  color: var(--ink);
+  opacity: .85;
+}
+
+.site-links{
+  display: flex;
+  gap: 28px;
+}
+
+.site-links a{
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  opacity: .75;
+  transition: opacity .15s ease;
+}
+
+.site-links a:hover{
+  opacity: 1;
+}
+
+/* Mobile */
+@media (max-width: 720px){
+  .site-links{
+    gap: 18px;
+  }
+}
+
