@@ -552,9 +552,10 @@ img{
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(212,203,194,.75); /* warm hero bg */
+
+  background: rgba(18,18,18,.72);   /* same gray as case-top */
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(18,18,18,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .site-nav{
@@ -564,14 +565,16 @@ img{
   padding: 14px 0;
 }
 
+/* logo */
 .site-logo{
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: .12em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--light);
   opacity: .85;
 }
 
+/* links */
 .site-links{
   display: flex;
   gap: 28px;
@@ -580,8 +583,8 @@ img{
 .site-links a{
   font-size: 12px;
   text-decoration: none;
-  color: var(--ink);
-  opacity: .75;
+  color: var(--light);
+  opacity: .65;
   transition: opacity .15s ease;
 }
 
@@ -595,4 +598,3 @@ img{
     gap: 18px;
   }
 }
-
