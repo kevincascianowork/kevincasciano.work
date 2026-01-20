@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Kevin Casciano</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="case">
+
+  <!-- Top bar -->
+  <header class="case-top">
+    <div class="wrap case-topbar">
+      <a class="case-back" href="/#work">← Back</a>
+
+      <div class="case-id">
+        <div class="case-kicker">CONTACT</div>
+        <h1 class="case-title">Get in touch</h1>
+      </div>
+
+      <div class="case-meta">
+        <div>Long Island, NY</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="case-intro">
+    <div class="wrap case-introgrid">
+
+      <div class="case-introtext">
+        <p class="case-lead">
+          For prints, licensing, assignments, collaborations, or press.
+        </p>
+
+        <p class="case-sub">
+          Keep it simple: who you are, what you need, timeline, and budget (if relevant).
+        </p>
+
+        <!-- Primary contact actions -->
+        <div class="contact-actions" style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <!-- Replace with your email -->
+          <a class="pill pill-light" href="mailto:kevincasciano.work@gmail.com?subject=Inquiry%20—%20Kevin%20Casciano">
+            Email <span class="arrow">↘</span>
+          </a>
+
+          <!-- Optional: phone -->
+          <!-- <a class="pill pill-light" href="tel:+16315551234">Call / Text <span class="arrow">↘</span></a> -->
+
+          <!-- Optional: Instagram -->
+          <a class="pill pill-light" href="www.instagram.com/kevincasciano.work/" target="_blank" rel="noopener">Instagram <span class="arrow">↘</span></a>
+        </div>
+      </div>
+
+      <!-- Optional image / simple card -->
+      <figure class="case-hero">
+        <img src="/img/self.png" alt="Portrait of Kevin Casciano" loading="eager" />
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- Details -->
+  <section class="case-gallery">
+    <div class="wrap">
+
+      <div class="gallery-head">
+        <h2 class="gallery-title">Details</h2>
+        <p class="gallery-note">If you’re reaching out for work, include the basics below.</p>
+      </div>
+
+      <div class="contact-grid" style="display:grid; gap:18px; grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <div class="contact-card" style="padding:18px; border-radius:18px; background:rgba(255,255,255,.06); outline:1px solid rgba(255,255,255,.08);">
+          <div style="font-size:10px; letter-spacing:.14em; opacity:.6; margin-bottom:8px;">EMAIL</div>
+          <div style="font-size:14px; opacity:.9;">
+            <a href="mailto:kevincasciano.work@gmail.com?subject=Inquiry%20—%20Kevin%20Casciano" style="text-decoration:none;">
+              kevincasciano.work@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card" style="padding:18px; border-radius:18px; background:rgba(255,255,255,.06); outline:1px solid rgba(255,255,255,.08);">
+          <div style="font-size:10px; letter-spacing:.14em; opacity:.6; margin-bottom:8px;">LOCATION</div>
+          <div style="font-size:14px; opacity:.9;">Long Island, New York</div>
+        </div>
+
+        <div class="contact-card" style="padding:18px; border-radius:18px; background:rgba(255,255,255,.06); outline:1px solid rgba(255,255,255,.08);">
+          <div style="font-size:10px; letter-spacing:.14em; opacity:.6; margin-bottom:8px;">REQUESTS</div>
+          <div style="font-size:13px; line-height:1.8; opacity:.75;">
+            Prints • Licensing • Assignments • Collaborations • Press
+          </div>
+        </div>
+
+        <div class="contact-card" style="padding:18px; border-radius:18px; background:rgba(255,255,255,.06); outline:1px solid rgba(255,255,255,.08);">
+          <div style="font-size:10px; letter-spacing:.14em; opacity:.6; margin-bottom:8px;">WHAT TO INCLUDE</div>
+          <div style="font-size:13px; line-height:1.8; opacity:.75;">
+            Context • Deliverables • Timeline • Usage • Budget
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="case-footer">
+    <div class="wrap case-foot">
+      <a class="case-back" href="/#work">← View collections</a>
+      <span class="case-credit">© <span id="y"></span> Kevin Casciano</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
