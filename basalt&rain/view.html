@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Basalt & Rain — Viewer</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="case">
+
+  <header class="case-top">
+    <div class="wrap case-topbar">
+      <a class="case-back" href="/urban-ecology/">← Back to Basalt & Rain</a>
+
+      <div class="case-id">
+        <div class="case-kicker">BASALT & RAIN</div>
+        <div id="counter" class="case-title">Image</div>
+      </div>
+
+      <div class="case-meta">
+        <a class="case-back" href="/#work">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="viewer">
+    <button class="nav-btn prev" type="button" aria-label="Previous image">←</button>
+
+    <figure class="viewer-frame">
+      <img id="viewerImg" alt="Urban Ecology image" />
+    </figure>
+
+    <button class="nav-btn next" type="button" aria-label="Next image">→</button>
+  </main>
+
+  <footer class="viewer-foot">
+    <a class="pill pill-light" id="prevLink" href="#">Prev</a>
+    <a class="pill pill-light" id="nextLink" href="#">Next</a>
+  </footer>
+
+<script>
+  const images = [
+    "hi1.jpg",
+    "hi2.jpg",
+    "hi3.jpg",
+    "hi4.jpg",
+    "hi5.jpg",
+    "hi6.jpg",
+    "hi9.jpg"
+  ];
+
+  const base = "/img/";
+
+  const params = new URLSearchParams(location.search);
+  const requested = params.get("i") || images[0];
+
+  let idx = images.indexOf(requested);
+  if (idx < 0) idx = 0;
+
+  const imgEl = document.getElementById("viewerImg");
+  const counter = document.getElementById("counter");
+  const prevLink = document.getElementById("prevLink");
+  const nextLink = document.getElementById("nextLink");
+
+  function go(n){
+    idx = (n + images.length) % images.length;
+    const file = images[idx];
+
+    imgEl.src = base + file;
+    counter.textContent = `Image ${idx + 1} / ${images.length}`;
+
+    const prevFile = images[(idx - 1 + images.length) % images.length];
+    const nextFile = images[(idx + 1) % images.length];
+
+    prevLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(prevFile)}`;
+    nextLink.href = `/urban-ecology/view.html?i=${encodeURIComponent(nextFile)}`;
+
+    history.replaceState(null, "", `/urban-ecology/view.html?i=${encodeURIComponent(file)}`);
+  }
+
+  imgEl.loading = "eager";
+  go(idx);
+
+  document.querySelector(".prev").addEventListener("click", () => go(idx - 1));
+  document.querySelector(".next").addEventListener("click", () => go(idx + 1));
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") go(idx - 1);
+    if (e.key === "ArrowRight") go(idx + 1);
+    if (e.key === "Escape") location.href = "/urban-ecology/";
+  });
+
+ // swipe (with click-safe flag)
+const frame = document.querySelector(".viewer-frame");
+let x0 = null;
+
+frame.addEventListener("touchstart", (e) => {
+  x0 = e.touches[0].clientX;
+  frame.dataset.swiping = "0";
+}, {passive:true});
+
+frame.addEventListener("touchend", (e) => {
+  if (x0 == null) return;
+
+  const x1 = e.changedTouches[0].clientX;
+  const dx = x1 - x0;
+
+  if (Math.abs(dx) > 40){
+    frame.dataset.swiping = "1";
+    (dx > 0) ? go(idx - 1) : go(idx + 1);
+  }
+
+  x0 = null;
+  setTimeout(() => { frame.dataset.swiping = "0"; }, 50);
+}, {passive:true});
+
+</script>
+
+  <script>
+// --- ZOOM (same script, no redeclare) ---
+let zoomed = false;
+let startX = 0, startY = 0;
+let offsetX = 0, offsetY = 0;
+
+frame.addEventListener("pointerup", () => {
+  if (frame.dataset.swiping === "1") return;
+
+  zoomed = !zoomed;
+  frame.classList.toggle("is-zoomed", zoomed);
+
+  if (!zoomed){
+    offsetX = 0;
+    offsetY = 0;
+    imgEl.style.transform = "scale(1)";
+  } else {
+    imgEl.style.transform = "scale(2)";
+  }
+});
+
+frame.addEventListener("mousedown", (e) => {
+  if (!zoomed) return;
+
+  startX = e.clientX - offsetX;
+  startY = e.clientY - offsetY;
+
+  function move(ev){
+    offsetX = ev.clientX - startX;
+    offsetY = ev.clientY - startY;
+    imgEl.style.transform = `scale(2) translate(${offsetX / 2}px, ${offsetY / 2}px)`;
+  }
+
+  function up(){
+    window.removeEventListener("mousemove", move);
+    window.removeEventListener("mouseup", up);
+  }
+
+  window.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", up);
+});
+
+// double-tap (optional)
+let lastTap = 0;
+frame.addEventListener("touchend", () => {
+  const now = Date.now();
+  if (now - lastTap < 300){
+    zoomed = !zoomed;
+    frame.classList.toggle("is-zoomed", zoomed);
+    imgEl.style.transform = zoomed ? "scale(2)" : "scale(1)";
+  }
+  lastTap = now;
+});
+</script>
+
+
+</body>
+</html>
